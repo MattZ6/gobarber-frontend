@@ -5,6 +5,7 @@ import ActionTypes from '~/store/modules/user/types';
 const INITIAL_STATE = {
   profile: null,
   loading: false,
+  updating: false,
 };
 
 export default function auth(state = INITIAL_STATE, action) {
@@ -23,6 +24,26 @@ export default function auth(state = INITIAL_STATE, action) {
 
       case ActionTypes.LOAD_FAILURE: {
         draft.loading = false;
+        break;
+      }
+
+      case ActionTypes.UPDATE_REQUEST: {
+        draft.updating = true;
+        break;
+      }
+
+      case ActionTypes.UPDATE_SUCCESS: {
+        draft.updating = false;
+        break;
+      }
+
+      case ActionTypes.UPDATE_FAILURE: {
+        draft.updating = false;
+        break;
+      }
+
+      case ActionTypes.SIGN_OUT: {
+        draft.profile = null;
         break;
       }
 
