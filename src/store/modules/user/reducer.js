@@ -8,14 +8,25 @@ const INITIAL_STATE = {
 };
 
 export default function auth(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case ActionTypes.LOAD_SUCCESS:
-      return produce(state, draft => {
+  return produce(state, draft => {
+    switch (action.type) {
+      case ActionTypes.LOAD_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+
+      case ActionTypes.LOAD_SUCCESS: {
         draft.profile = action.payload.user;
         draft.loading = false;
-      });
+        break;
+      }
 
-    default:
-      return state;
-  }
+      case ActionTypes.LOAD_FAILURE: {
+        draft.loading = false;
+        break;
+      }
+
+      default:
+    }
+  });
 }
