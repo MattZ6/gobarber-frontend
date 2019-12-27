@@ -1,19 +1,17 @@
 import produce from 'immer';
 
-import ActionTypes from '~/store/modules/auth/types';
+import ActionTypes from '~/store/modules/user/types';
 
 const INITIAL_STATE = {
-  token: null,
-  signed: false,
+  user: null,
   loading: false,
 };
 
 export default function auth(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case ActionTypes.SIGN_IN_SUCCESS:
+    case ActionTypes.LOAD_SUCCESS:
       return produce(state, draft => {
-        draft.token = action.payload.token;
-        draft.signed = true;
+        draft.user = action.payload.user;
         draft.loading = false;
       });
 
